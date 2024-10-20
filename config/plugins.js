@@ -13,4 +13,15 @@ module.exports = ({ env }) => ({
       },
     },
   },
+  email: {
+    config: {
+      provider: "strapi-zeptomail",
+      providerOptions: {
+        apiKey: env("ZEPTOMAIL_API_KEY"),
+      },
+      settings: {
+        defaultFrom: "No-reply <no-reply@srsths.edu.ph>"
+      },
+    },
+  },
 });
