@@ -362,72 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiAnnouncementAnnouncement extends Schema.CollectionType {
-  collectionName: 'announcements';
-  info: {
-    singularName: 'announcement';
-    pluralName: 'announcements';
-    displayName: 'Announcement';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    authors: Attribute.Text &
-      Attribute.Required &
-      Attribute.CustomField<
-        'plugin::string-array.input',
-        {
-          separator: 'semicolon';
-        }
-      >;
-    publishDate: Attribute.DateTime & Attribute.Required;
-    thumbnail: Attribute.Media<'images'> & Attribute.Required;
-    body: Attribute.Blocks & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::announcement.announcement',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::announcement.announcement',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiClubClub extends Schema.CollectionType {
-  collectionName: 'clubs';
-  info: {
-    singularName: 'club';
-    pluralName: 'clubs';
-    displayName: 'Club';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String & Attribute.Required;
-    description: Attribute.Text & Attribute.Required;
-    logo: Attribute.Media<'images'> & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<'api::club.club', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<'api::club.club', 'oneToOne', 'admin::user'> &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -854,6 +788,119 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiAnnouncementAnnouncement extends Schema.CollectionType {
+  collectionName: 'announcements';
+  info: {
+    singularName: 'announcement';
+    pluralName: 'announcements';
+    displayName: 'Announcement';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    authors: Attribute.Text &
+      Attribute.Required &
+      Attribute.CustomField<
+        'plugin::string-array.input',
+        {
+          separator: 'semicolon';
+        }
+      >;
+    publishDate: Attribute.DateTime & Attribute.Required;
+    thumbnail: Attribute.Media<'images'> & Attribute.Required;
+    body: Attribute.Blocks & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::announcement.announcement',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::announcement.announcement',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiClubClub extends Schema.CollectionType {
+  collectionName: 'clubs';
+  info: {
+    singularName: 'club';
+    pluralName: 'clubs';
+    displayName: 'Club';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    logo: Attribute.Media<'images'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::club.club', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::club.club', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiClubAnnouncementClubAnnouncement
+  extends Schema.CollectionType {
+  collectionName: 'club_announcements';
+  info: {
+    singularName: 'club-announcement';
+    pluralName: 'club-announcements';
+    displayName: 'Club Announcement';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    authors: Attribute.Text &
+      Attribute.CustomField<
+        'plugin::string-array.input',
+        {
+          separator: 'semicolon';
+        }
+      >;
+    publishDate: Attribute.DateTime & Attribute.Required;
+    body: Attribute.Blocks & Attribute.Required;
+    club: Attribute.Relation<
+      'api::club-announcement.club-announcement',
+      'oneToOne',
+      'api::club.club'
+    >;
+    thumbnail: Attribute.Media<'images'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::club-announcement.club-announcement',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::club-announcement.club-announcement',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -864,8 +911,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::announcement.announcement': ApiAnnouncementAnnouncement;
-      'api::club.club': ApiClubClub;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -874,6 +919,9 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::announcement.announcement': ApiAnnouncementAnnouncement;
+      'api::club.club': ApiClubClub;
+      'api::club-announcement.club-announcement': ApiClubAnnouncementClubAnnouncement;
     }
   }
 }
