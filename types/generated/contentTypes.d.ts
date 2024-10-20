@@ -956,6 +956,7 @@ export interface ApiTheSatellitePublicationTheSatellitePublication
     singularName: 'the-satellite-publication';
     pluralName: 'the-satellite-publications';
     displayName: 'The Satellite Publication';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -972,6 +973,10 @@ export interface ApiTheSatellitePublicationTheSatellitePublication
     publishDate: Attribute.DateTime & Attribute.Required;
     body: Attribute.Blocks & Attribute.Required;
     thumbnail: Attribute.Media<'images'>;
+    category: Attribute.Enumeration<
+      ['News', 'Editorial', 'Feature', 'Science & Technology', 'Sports']
+    > &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

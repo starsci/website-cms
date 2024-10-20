@@ -4,7 +4,8 @@
   "info": {
     "singularName": "the-satellite-publication",
     "pluralName": "the-satellite-publications",
-    "displayName": "The Satellite Publication"
+    "displayName": "The Satellite Publication",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -31,11 +32,23 @@
       "required": true
     },
     "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
+      ]
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "News",
+        "Editorial",
+        "Feature",
+        "Science & Technology",
+        "Sports"
       ],
-      "type": "media",
-      "multiple": false
+      "required": true
     }
   }
 }
