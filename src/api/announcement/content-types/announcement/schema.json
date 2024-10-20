@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "announcements",
+  "info": {
+    "singularName": "announcement",
+    "pluralName": "announcements",
+    "displayName": "Announcement",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "authors": {
+      "type": "customField",
+      "options": {
+        "separator": "semicolon"
+      },
+      "customField": "plugin::string-array.input",
+      "required": true
+    },
+    "publishDate": {
+      "type": "datetime",
+      "required": true
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "body": {
+      "type": "blocks",
+      "required": true
+    }
+  }
+}
