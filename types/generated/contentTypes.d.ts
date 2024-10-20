@@ -954,6 +954,44 @@ export interface ApiClubAnnouncementClubAnnouncement
   };
 }
 
+export interface ApiClubManagerClubManager extends Schema.CollectionType {
+  collectionName: 'club_managers';
+  info: {
+    singularName: 'club-manager';
+    pluralName: 'club-managers';
+    displayName: 'Club Manager';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    user: Attribute.Relation<
+      'api::club-manager.club-manager',
+      'oneToOne',
+      'admin::user'
+    >;
+    club: Attribute.Relation<
+      'api::club-manager.club-manager',
+      'oneToOne',
+      'api::club.club'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::club-manager.club-manager',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::club-manager.club-manager',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiTheSatellitePublicationTheSatellitePublication
   extends Schema.CollectionType {
   collectionName: 'the_satellite_publications';
@@ -1022,6 +1060,7 @@ declare module '@strapi/types' {
       'api::announcement.announcement': ApiAnnouncementAnnouncement;
       'api::club.club': ApiClubClub;
       'api::club-announcement.club-announcement': ApiClubAnnouncementClubAnnouncement;
+      'api::club-manager.club-manager': ApiClubManagerClubManager;
       'api::the-satellite-publication.the-satellite-publication': ApiTheSatellitePublicationTheSatellitePublication;
     }
   }

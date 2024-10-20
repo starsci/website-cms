@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "club_managers",
+  "info": {
+    "singularName": "club-manager",
+    "pluralName": "club-managers",
+    "displayName": "Club Manager"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "admin::user"
+    },
+    "club": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::club.club"
+    }
+  }
+}
