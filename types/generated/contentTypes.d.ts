@@ -853,6 +853,13 @@ export interface ApiAnnouncementAnnouncement extends Schema.CollectionType {
     publishDate: Attribute.DateTime & Attribute.Required;
     thumbnail: Attribute.Media<'images'> & Attribute.Required;
     body: Attribute.Blocks & Attribute.Required;
+    tags: Attribute.Text &
+      Attribute.CustomField<
+        'plugin::string-array.input',
+        {
+          separator: 'semicolon';
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

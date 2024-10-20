@@ -39,6 +39,13 @@
     "body": {
       "type": "blocks",
       "required": true
+    },
+    "tags": {
+      "type": "customField",
+      "options": {
+        "separator": "semicolon"
+      },
+      "customField": "plugin::string-array.input"
     }
   }
 }
