@@ -795,6 +795,7 @@ export interface ApiAngPararayosPublicationAngPararayosPublication
     singularName: 'ang-pararayos-publication';
     pluralName: 'ang-pararayos-publications';
     displayName: 'Ang Pararayos Publication';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -811,6 +812,10 @@ export interface ApiAngPararayosPublicationAngPararayosPublication
     publishDate: Attribute.DateTime & Attribute.Required;
     body: Attribute.Blocks & Attribute.Required;
     thumbnail: Attribute.Media<'images'>;
+    category: Attribute.Enumeration<
+      ['Balita', 'Lathalain', 'AgTek', 'Isports', 'Editoryal']
+    > &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
