@@ -16,5 +16,35 @@ module.exports = {
    * This gives you an opportunity to set up your data model,
    * run jobs, or perform some special logic.
    */
-  bootstrap(/*{ strapi }*/) {},
+  async bootstrap(/*{ strapi }*/) {
+    const conditions = [
+      {
+        displayName: "Belongs to same club",
+        name: "belongs-to-same-club",
+        async handler(user) {
+          // get from club-manager and compare if user belongs to the same
+          // club as post
+          const result = await strapi.db.query("api::club-manager.club-manager").findOne({
+            where: {
+              user: {
+                id: user.id
+              }
+            },
+            populate: {
+              user: true,
+              club: true
+            }
+          })
+
+          return {
+            id: {
+              $eq: result.club.id
+            }
+          }
+        }
+      }
+    ]
+
+    await strapi.admin.services.permission.conditionProvider.registerMany(conditions)
+  },
 };
