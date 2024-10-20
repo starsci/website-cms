@@ -1,0 +1,41 @@
+{
+  "kind": "collectionType",
+  "collectionName": "ang_pararayos_publications",
+  "info": {
+    "singularName": "ang-pararayos-publication",
+    "pluralName": "ang-pararayos-publications",
+    "displayName": "Ang Pararayos Publication"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "authors": {
+      "type": "customField",
+      "options": {
+        "separator": "semicolon"
+      },
+      "customField": "plugin::string-array.input"
+    },
+    "publishDate": {
+      "type": "datetime",
+      "required": true
+    },
+    "body": {
+      "type": "blocks",
+      "required": true
+    },
+    "thumbnail": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

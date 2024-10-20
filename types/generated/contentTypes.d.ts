@@ -788,6 +788,47 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiAngPararayosPublicationAngPararayosPublication
+  extends Schema.CollectionType {
+  collectionName: 'ang_pararayos_publications';
+  info: {
+    singularName: 'ang-pararayos-publication';
+    pluralName: 'ang-pararayos-publications';
+    displayName: 'Ang Pararayos Publication';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    authors: Attribute.Text &
+      Attribute.CustomField<
+        'plugin::string-array.input',
+        {
+          separator: 'semicolon';
+        }
+      >;
+    publishDate: Attribute.DateTime & Attribute.Required;
+    body: Attribute.Blocks & Attribute.Required;
+    thumbnail: Attribute.Media<'images'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::ang-pararayos-publication.ang-pararayos-publication',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::ang-pararayos-publication.ang-pararayos-publication',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiAnnouncementAnnouncement extends Schema.CollectionType {
   collectionName: 'announcements';
   info: {
@@ -919,6 +960,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::ang-pararayos-publication.ang-pararayos-publication': ApiAngPararayosPublicationAngPararayosPublication;
       'api::announcement.announcement': ApiAnnouncementAnnouncement;
       'api::club.club': ApiClubClub;
       'api::club-announcement.club-announcement': ApiClubAnnouncementClubAnnouncement;
