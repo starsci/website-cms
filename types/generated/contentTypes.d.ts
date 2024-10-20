@@ -942,6 +942,47 @@ export interface ApiClubAnnouncementClubAnnouncement
   };
 }
 
+export interface ApiTheSatellitePublicationTheSatellitePublication
+  extends Schema.CollectionType {
+  collectionName: 'the_satellite_publications';
+  info: {
+    singularName: 'the-satellite-publication';
+    pluralName: 'the-satellite-publications';
+    displayName: 'The Satellite Publication';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    authors: Attribute.Text &
+      Attribute.CustomField<
+        'plugin::string-array.input',
+        {
+          separator: 'semicolon';
+        }
+      >;
+    publishDate: Attribute.DateTime & Attribute.Required;
+    body: Attribute.Blocks & Attribute.Required;
+    thumbnail: Attribute.Media<'images'>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::the-satellite-publication.the-satellite-publication',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::the-satellite-publication.the-satellite-publication',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -964,6 +1005,7 @@ declare module '@strapi/types' {
       'api::announcement.announcement': ApiAnnouncementAnnouncement;
       'api::club.club': ApiClubClub;
       'api::club-announcement.club-announcement': ApiClubAnnouncementClubAnnouncement;
+      'api::the-satellite-publication.the-satellite-publication': ApiTheSatellitePublicationTheSatellitePublication;
     }
   }
 }
